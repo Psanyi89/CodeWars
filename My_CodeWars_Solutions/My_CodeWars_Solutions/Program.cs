@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 
 namespace My_CodeWars_Solutions
@@ -7,8 +8,37 @@ namespace My_CodeWars_Solutions
     class Program
     {
         static void Main(string[] args)
-        {     
+        {
             Console.ReadKey();
+        }
+        // Reverse or Rotate
+        public static string RevRot(string strng, int sz)
+        {
+            if (string.IsNullOrWhiteSpace(strng) || sz > strng.Length || sz <= 0)
+            {
+                return "";
+            }
+            else
+            {
+                string result = "";
+                int i = 0;
+                int j = sz;
+                while (i <= (strng.Length - sz))
+                {
+                    double sum = 0;
+                    char[] array = strng.Substring(i, sz).ToCharArray();
+                    foreach (var item in array)
+                    {
+                        sum += Math.Pow(Convert.ToDouble(item.ToString()), 3);
+
+                    }
+                    if (sum % 2 == 0) Array.Reverse(array);
+                    else array = array.Skip(1).Concat(array.Take(1)).ToArray();
+                    result += string.Concat(array);
+                    i += sz;
+                }
+                return result;
+            }
         }
         // Bit Counting
         public static int CountBits(int n)
