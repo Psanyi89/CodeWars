@@ -11,6 +11,22 @@ namespace My_CodeWars_Solutions
         {
             Console.ReadKey();
         }
+        //First non-repeating character
+        public static string FirstNonRepeatingLetter(string s)
+        {
+            string result = "";
+            char[] array = s.ToCharArray();
+            foreach (var item in array)
+            {
+                if (s.ToLower().Count(x => x == Convert.ToChar(item.ToString().ToLower())) == 1)
+                {
+                    result = item.ToString();
+                    break;
+                }
+
+            }
+            return result;
+        }
         // Reverse or Rotate
         public static string RevRot(string strng, int sz)
         {
