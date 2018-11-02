@@ -9,7 +9,43 @@ namespace My_CodeWars_Solutions
     {
         static void Main(string[] args)
         {
+            Console.WriteLine(Is_Valid_IP("12.255.56.1"));
+            Console.WriteLine(Is_Valid_IP(""));
+            Console.WriteLine(Is_Valid_IP("abc.def.ghi.jkl"));
+            Console.WriteLine(Is_Valid_IP("123.456.789.0"));
+            Console.WriteLine(Is_Valid_IP("12.34.56"));
+            Console.WriteLine(Is_Valid_IP("12.34.56 .1"));
+            Console.WriteLine(Is_Valid_IP("12.34.56.-1"));
+            Console.WriteLine(Is_Valid_IP("123.045.067.089"));
             Console.ReadKey();
+        }
+        // IP Validation
+        public static bool Is_Valid_IP(string IpAddres)
+        {
+            string[] temp = IpAddres.Split('.');
+            bool valid = false;
+            if (temp.Length == 4)
+            {
+                foreach (var item in temp)
+                {
+                    valid = int.TryParse(item, out int szam);
+                    if (valid == true)
+                    {
+                        if (item.Length > 1 && item[0] == '0')
+                        {
+                            valid = false;
+                            break;
+                        }
+                        if (Convert.ToDouble(item.ToString()) > 255 || Convert.ToDouble(item.ToString()) < 0 || item.Contains(" "))
+                        {
+                            valid = false;
+                            break;
+                        }
+                    }
+                    else break;
+                }
+            }
+            return valid;
         }
         //First non-repeating character
         public static string FirstNonRepeatingLetter(string s)
